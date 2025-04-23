@@ -1,12 +1,3 @@
-import { db } from './firebase-config.js';
-import {
-  collection,
-  addDoc,
-  getDoc,
-  doc,
-  deleteDoc,
-} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js';
-
 // Check if user is visiting a shared link
 const hashKey = window.location.hash.slice(1);
 const retrievedMessageDiv = document.getElementById('retrievedMessage');
