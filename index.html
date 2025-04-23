@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Pastebin</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>🔐 Secure Pastebin</h1>
+
+    <textarea id="messageInput" placeholder="Write your private message here..."></textarea>
+    <button id="generateLink">Generate Secure Link</button>
+    
+    <p id="generatedLink" style="word-break: break-all;"></p>
+
+    <div id="retrievedMessage" class="hidden"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script type="module" src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
