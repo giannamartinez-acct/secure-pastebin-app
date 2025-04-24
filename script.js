@@ -1,6 +1,16 @@
+// script.js
+import { db } from './firebase-config.js';
+import {
+  collection,
+  addDoc,
+  getDoc,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
 console.log("Script loaded");
 
-// Check if user is visiting a shared link
+// If a user is visiting a shared link
 const hashKey = window.location.hash.slice(1);
 const retrievedMessageDiv = document.getElementById('retrievedMessage');
 
@@ -21,13 +31,12 @@ if (hashKey) {
   });
 }
 
-// ✅ Clean: Single listener, full logic + logging
 document.getElementById('generateLink').addEventListener('click', async () => {
   console.log("Button clicked");
 
   const message = document.getElementById('messageInput').value;
-  if (!message) {
-    alert("Please enter a message before generating the link.");
+  if (!message.trim()) {
+    alert("Please enter a message first!");
     return;
   }
 
@@ -41,4 +50,12 @@ document.getElementById('generateLink').addEventListener('click', async () => {
     document.getElementById('generatedLink').innerHTML = `
       <strong>Secure Link:</strong><br>
       <a href="${link}" target="_blank">${link}</a>
-      <br><br><button onclick
+      <br><br><button onclick="copyToClipboard('${link}')">📋 Copy to Clipboard</button>
+    `;
+  } catch (error) {
+    alert("Error generating link: " + error.message);
+  }
+});
+
+function copyToClipboard(text) {
+  navigator.clip
