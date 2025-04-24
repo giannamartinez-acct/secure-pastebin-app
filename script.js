@@ -1,16 +1,10 @@
-// script.js
-import { db } from './firebase-config.js';
-import {
-  collection,
-  addDoc,
-  getDoc,
-  deleteDoc,
-  doc
-} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-
 console.log("Script loaded");
 
-// If a user is visiting a shared link
+// Firebase imports
+import { db } from './firebase-config.js';
+import { collection, addDoc, getDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+// Check if user is visiting a shared link
 const hashKey = window.location.hash.slice(1);
 const retrievedMessageDiv = document.getElementById('retrievedMessage');
 
@@ -28,15 +22,18 @@ if (hashKey) {
       retrievedMessageDiv.textContent = 'This message no longer exists.';
       retrievedMessageDiv.classList.remove('hidden');
     }
+  }).catch(error => {
+    console.error("Error retrieving message:", error);
   });
 }
 
+// Generate new encrypted message + link
 document.getElementById('generateLink').addEventListener('click', async () => {
   console.log("Button clicked");
 
-  const message = document.getElementById('messageInput').value;
-  if (!message.trim()) {
-    alert("Please enter a message first!");
+  const message = document.getElementById('messageInput').value.trim();
+  if (!message) {
+    alert("Please enter a message before generating a link.");
     return;
   }
 
@@ -53,9 +50,16 @@ document.getElementById('generateLink').addEventListener('click', async () => {
       <br><br><button onclick="copyToClipboard('${link}')">📋 Copy to Clipboard</button>
     `;
   } catch (error) {
-    alert("Error generating link: " + error.message);
+    console.error("Error generating link:", error);
+    alert("Failed to generate secure link. Please try again.");
   }
 });
 
 function copyToClipboard(text) {
-  navigator.clip
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Link copied! Send it safely. This message will expire after viewing.');
+  }).catch(err => {
+    console.error("Clipboard error:", err);
+    alert("Failed to copy link to clipboard.");
+  });
+}
