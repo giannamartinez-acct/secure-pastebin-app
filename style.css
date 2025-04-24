@@ -1,34 +1,63 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-  }
-  .container {
-    max-width: 600px;
-    width: 100%;
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  textarea {
-    width: 100%;
-    height: 150px;
-    margin-bottom: 1rem;
-  }
-  button {
-    background-color: #0D3B66;
-    color: white;
-    border: none;
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #07406c;
-  }
-  .hidden {
-    display: none;
-  }
-  
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #F6F5F3;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: white;
+  border: 2px solid #C5D1B9;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  width: 90%;
+  max-width: 600px;
+}
+
+h1 {
+  text-align: center;
+  color: #0D3B66;
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 15px;
+  border: 1px solid #C5D1B9;
+  border-radius: 10px;
+  resize: none;
+  font-size: 1rem;
+  background-color: #FAFAFA;
+}
+
+button {
+  margin-top: 15px;
+  background-color: #D8829D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #C86A89;
+}
+
+#generatedLink, #retrievedMessage {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #0D3B66;
+}
+
+.hidden {
+  display: none;
+}
