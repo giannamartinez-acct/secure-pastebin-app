@@ -1,3 +1,5 @@
+console.log("Script loaded");
+
 // Check if user is visiting a shared link
 const hashKey = window.location.hash.slice(1);
 const retrievedMessageDiv = document.getElementById('retrievedMessage');
@@ -19,25 +21,24 @@ if (hashKey) {
   });
 }
 
-// Generate new encrypted message + link
+// ✅ Clean: Single listener, full logic + logging
 document.getElementById('generateLink').addEventListener('click', async () => {
+  console.log("Button clicked");
+
   const message = document.getElementById('messageInput').value;
+  if (!message) {
+    alert("Please enter a message before generating the link.");
+    return;
+  }
+
   const key = CryptoJS.lib.WordArray.random(16).toString();
   const encrypted = CryptoJS.AES.encrypt(message, key).toString();
 
-  const docRef = await addDoc(collection(db, 'messages'), { text: encrypted });
-  const link = `${window.location.origin}${window.location.pathname}#${btoa(docRef.id + ':' + key)}`;
+  try {
+    const docRef = await addDoc(collection(db, 'messages'), { text: encrypted });
+    const link = `${window.location.origin}${window.location.pathname}#${btoa(docRef.id + ':' + key)}`;
 
-  document.getElementById('generatedLink').innerHTML = `
-    <strong>Secure Link:</strong><br>
-    <a href="${link}" target="_blank">${link}</a>
-    <br><br><button onclick="copyToClipboard('${link}')">📋 Copy to Clipboard</button>
-  `;
-});
-
-// Clipboard copy
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    alert('Link copied! Send it safely. This message will expire after viewing.');
-  });
-}
+    document.getElementById('generatedLink').innerHTML = `
+      <strong>Secure Link:</strong><br>
+      <a href="${link}" target="_blank">${link}</a>
+      <br><br><button onclick
