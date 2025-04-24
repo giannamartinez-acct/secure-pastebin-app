@@ -27,7 +27,7 @@ This is a lightweight web app that allows users to send private, encrypted messa
 
 ## 🧪 Try It Live
 
-🌐 [Live Site](https://your-live-link.netlify.app) — _(replace with your deployed link)_
+🌐 [Live Site](https://giannamartinez-acct.github.io/secure-pastebin-app/) 
 
 ## 📸 Screenshots
 
