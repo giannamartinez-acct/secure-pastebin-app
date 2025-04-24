@@ -31,9 +31,7 @@ This is a lightweight web app that allows users to send private, encrypted messa
 
 ## 📸 Screenshots
 
-| Message Entry | Decrypted Message |
-|---------------|------------------|
-| ![Generate](./screenshots/input.png) | ![Output](./screenshots/output.png) |
+| ![Generate](./screenshots/input.png) | ![Output](./screenshots/Generate.png) |
 
 ## 🤝 Credits
 
