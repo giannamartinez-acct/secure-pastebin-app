@@ -27,39 +27,44 @@ if (hashKey) {
   });
 }
 
-// Generate new encrypted message + link
-document.getElementById('generateLink').addEventListener('click', async () => {
-  console.log("Button clicked");
+// Generate encrypted message and link
+document.addEventListener("DOMContentLoaded", () => {
+  const generateBtn = document.getElementById('generateLink');
 
-  const message = document.getElementById('messageInput').value.trim();
-  if (!message) {
-    alert("Please enter a message before generating a link.");
-    return;
-  }
+  generateBtn.addEventListener('click', async () => {
+    console.log("Button clicked");
 
-  const key = CryptoJS.lib.WordArray.random(16).toString();
-  const encrypted = CryptoJS.AES.encrypt(message, key).toString();
+    const message = document.getElementById('messageInput').value.trim();
+    if (!message) {
+      alert("Please enter a message before generating a link.");
+      return;
+    }
 
-  try {
-    const docRef = await addDoc(collection(db, 'messages'), { text: encrypted });
-    const link = `${window.location.origin}${window.location.pathname}#${btoa(docRef.id + ':' + key)}`;
+    const key = CryptoJS.lib.WordArray.random(16).toString();
+    const encrypted = CryptoJS.AES.encrypt(message, key).toString();
 
-    document.getElementById('generatedLink').innerHTML = `
-      <strong>Secure Link:</strong><br>
-      <a href="${link}" target="_blank">${link}</a>
-      <br><br><button onclick="copyToClipboard('${link}')">📋 Copy to Clipboard</button>
-    `;
-  } catch (error) {
-    console.error("Error generating link:", error);
-    alert("Failed to generate secure link. Please try again.");
-  }
-});
+    try {
+      const docRef = await addDoc(collection(db, 'messages'), { text: encrypted });
+      const link = `${window.location.origin}${window.location.pathname}#${btoa(docRef.id + ':' + key)}`;
 
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    alert('Link copied! Send it safely. This message will expire after viewing.');
-  }).catch(err => {
-    console.error("Clipboard error:", err);
-    alert("Failed to copy link to clipboard.");
+      document.getElementById('generatedLink').innerHTML = `
+        <strong>Secure Link:</strong><br>
+        <a href="${link}" target="_blank">${link}</a>
+        <br><br><button id="copyBtn">📋 Copy to Clipboard</button>
+      `;
+
+      // Add listener to the new button
+      document.getElementById('copyBtn').addEventListener('click', () => {
+        navigator.clipboard.writeText(link).then(() => {
+          alert('Link copied! Send it safely. This message will expire after viewing.');
+        }).catch(err => {
+          console.error("Clipboard error:", err);
+          alert("Failed to copy link to clipboard.");
+        });
+      });
+    } catch (error) {
+      console.error("Error generating link:", error);
+      alert("Failed to generate secure link. Please try again.");
+    }
   });
-}
+});
