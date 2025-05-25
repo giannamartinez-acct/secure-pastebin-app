@@ -2,6 +2,7 @@ console.log("Script loaded");
 
 // Firebase imports
 import { db } from './firebase-config.js';
+
 import { collection, addDoc, getDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 // Check if user is visiting a shared link
