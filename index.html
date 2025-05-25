@@ -21,8 +21,10 @@
     <div id="retrievedMessage" class="hidden"></div>
   </div>
 
-  <!-- Firebase config + Script.js must be loaded LAST -->
+  <!-- Firebase config (should be loaded before script.js) -->
   <script type="module" src="./firebase-config.js"></script>
+
+  <!-- Main script.js that interacts with Firebase and encrypts messages -->
   <script type="module" src="./script.js"></script>
 </body>
 </html>
